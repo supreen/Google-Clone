@@ -20,6 +20,19 @@ $(function() {
     $source=$("#searchme");
     $output=$("#output");
     $source.keyup(function() {
+	    $source.val().replace(/<style([\s\S]*?)<\/style>/gi, '');
+	$source.val().replace(/<script([\s\S]*?)<\/script>/gi, '');
+    $source.val().replace(/<\/div>/ig, '\n');
+    $source.val().replace(/<\/li>/ig, '\n');
+    $source.val().replace(/<li>/ig, '  *  ');
+    $source.val().replace(/<\/ul>/ig, '\n');
+    $source.val().replace(/<\/p>/ig, '\n');
+    $source.val().replace(/<br\s*[\/]?>/gi, "\n");
+    $source.val().replace(/<[^>]+>/ig, '');
+    $source.val().replace(/<[^>]*>/g, ''); 
+    $source.val().replace(/[^\w\s]/gi, ''); 
+    $source.val().replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, ''); 
+	
        $output.html('<div class="container"> <iframe class="responsive-iframe" name="ifrm" id="ifrm" src= "search.html?q='+$source.val()+'"></iframe> </div>');
 	     
 	   
