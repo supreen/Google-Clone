@@ -16,11 +16,22 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 <!-- scripts -->
 <script>
+
+function delay(callback, ms) {
+  var timer = 0;
+  return function() {
+    var context = this, args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      callback.apply(context, args);
+    }, ms || 0);
+  };
+}
+
 $(function() {
     $source=$("#searchme");
     $output=$("#output");
-    $source.keyup(function() {
-	    $source.val().replace(/<style([\s\S]*?)<\/style>/gi, '');
+		$source.val().replace(/<style([\s\S]*?)<\/style>/gi, '');
 	$source.val().replace(/<script([\s\S]*?)<\/script>/gi, '');
     $source.val().replace(/<\/div>/ig, '\n');
     $source.val().replace(/<\/li>/ig, '\n');
@@ -32,12 +43,19 @@ $(function() {
     $source.val().replace(/<[^>]*>/g, ''); 
     $source.val().replace(/[^\w\s]/gi, ''); 
     $source.val().replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, ''); 
-	
-       $output.html('<div class="container"> <iframe class="responsive-iframe" name="ifrm" id="ifrm" src= "search.html?q='+$source.val()+'"></iframe> </div>');
-	     
+
+    $source.keyup(delay(function() {
+       $output.html(
+	'<div>'+
+	'<h2><a  style="color: white; background-color:red;"> Amazon</a><h2>'+
+	'<div class="container"> <iframe class="responsive-iframe" name="ifrm" id="ifrm" src= "search.html?q=site:amazon.com '+$source.val()+'"></iframe> </div>'+
+	'<h2><a  style="color: white; background-color:orange;"> Aliexpress</a><h2>'+
+	'<div class="container"> <iframe class="responsive-iframe" name="ifrm" id="ifrm" src= "search.html?q=site:aliexpress.com '+$source.val()+'"></iframe> </div>'+     
+	'<h2><a  style="color: white; background-color:green;">Daraz<h2>'+
+	'<div class="container"> <iframe class="responsive-iframe" name="ifrm" id="ifrm" src= "search.html?q=site:daraz.pk '+$source.val()+'"></iframe> </div>'+
+	'</div>');
 	   
-	   
-    });
+    }, 500));
 });
 </script>
 <!-- style -->
