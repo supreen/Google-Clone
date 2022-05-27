@@ -13,3 +13,9 @@ Google clone using js, jquery and html only. It uses google's  CSE(Custom search
 
 <br>
 <p><h2>You are ready to go.</h2></p> 
+
+<h3>Consider buying me a coffee, if you loved my work.</h3>
+<li>https://www.buymeacoffee.com/suprin
+
+<h3>If you are still finding it hard, Hire me</h3> 
+<li>https://www.fiverr.com/supree
